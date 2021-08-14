@@ -1,0 +1,245 @@
+{% extends "base.html" %}
+
+{% block main %}
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Prediction Results</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h5>Prediction Input:</h5>
+                <div>Age: <span id="sl"></span></div>
+                <div>Job: <span id="sw"></span></div>
+                <div>marital: <span id="pl"></span></div>
+                <div>Education: <span id="pw"></span></div>
+                <div>balance: <span id="pw"></span></div>
+                <div>Ehousing: <span id="pw"></span></div>
+                <div>loan: <span id="pw"></span></div>
+                <div>contact: <span id="pw"></span></div>
+                <div>Day: <span id="pw"></span></div>
+                <div>campaign: <span id="pw"></span></div>
+                <div>previous: <span id="pw"></span></div>
+                <div>poutcome: <span id="pw"></span></div>
+                <h5 class="pt-3">Prediction Classification:</h5>
+                <div id="prediction"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <a class="btn btn-primary" href="/results" role="button">View DB</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+ <div class="p-5 mb-4 bg-light rounded-3">
+      <form method="POST" enctype="multipart/form-data" action="deposit/predictbankdeposit/" class="h-100 p-5 text-white bg-dark rounded-3">
+         {% csrf_token %}
+         <input type="hidden" name="csrfmiddlewaretoken" value="QuQENf1so6b4kcwR8p6Xzq4iNVj3o1aFSejlpla9sNNToJfwg1bjjtUOeec8Herz">
+         <div class="row g-3">
+         <div class="col-md-4 col-sm-4">
+            <label for="age" class="form-label">Age</label>
+            <input type="number" class="form-control" id="age" placeholder="" value="" required="">
+         </div>
+         <div class="col-md-4 col-sm-4">
+            <label for="job" class="form-label">job</label>
+            <select class="form-select" id="job" required="">
+               <option value="">Choose...</option>
+               <option>1</option>
+               <option>2</option>
+               <option>3</option>
+               <option>4</option>
+               <option>5</option>
+               <option>6</option>
+               <option>7</option>
+               <option>8</option>
+               <option>9</option>
+               <option>10</option>
+               <option>11</option>
+               <option>12</option>
+            </select>
+            <div class="invalid-feedback">
+               Please provide a valid state.
+            </div>
+         </div>
+         <div class="col-md-4 col-sm-4">
+            <label for="marital" class="form-label">marital</label>
+            <select class="form-select" id="marital" required="">
+               <option value="">Choose...</option>
+               <option>0</option>
+               <option>1</option>
+               <option>2</option>
+            </select>
+         </div>
+         <div class="invalid-feedback">
+            Please provide a valid state.
+         </div>
+         <div class="col-md-4 col-sm-4">
+            <label for="education" class="form-label">education</label>
+            <select class="form-select" id="education" required="">
+               <option value="">Choose...</option>
+               <option>0</option>
+               <option>1</option>
+               <option>2</option>
+               <option>3</option>
+            </select>
+         </div>
+         <div class="invalid-feedback">
+            Please provide a valid state.
+         </div>
+         <div class="col-md-4 col-sm-4">
+            <label for="default" class="form-label">default</label>
+            <select class="form-select" id="default" required="">
+               <option value="">Choose...</option>
+               <option>0</option>
+               <option>1</option>
+            </select>
+         </div>
+         <div class="invalid-feedback">
+            Please provide a valid state.
+         </div>
+         <div class="col-md-4 col-sm-4">
+            <label for="balance" class="form-label">balance</label>
+            <input type="number" class="form-control" id="balance" placeholder="" value="" required="">
+         </div>
+         <div class="invalid-feedback">
+            Please provide a valid state.
+         </div>
+         <div class="col-md-4 col-sm-4">
+            <label for="housing" class="form-label">housing</label>
+            <select class="form-select" id="housing" required="">
+               <option value="">Choose...</option>
+               <option>0</option>
+               <option>1</option>
+            </select>
+         </div>
+         <div class="invalid-feedback">
+            Please provide a valid state.
+         </div>
+         <div class="col-md-4 col-sm-4">
+            <label for="loan" "="" class="form-label">loan"</label>
+            <select class="form-select" id="loan" required="">
+               <option value="">Choose...</option>
+               <option>0</option>
+               <option>1</option>
+            </select>
+            <div class="invalid-feedback">
+               Please provide a valid state.
+            </div>
+         </div>
+         <div class="col-md-4 col-sm-4">
+         <label for="contact" "="" class="form-label">contact"</label>
+         <select class="form-select" id="contact" required="">
+            <option value="">Choose...</option>
+            <option>0</option>
+            <option>1</option>
+         </select>
+         <div class="invalid-feedback">
+            Please provide a valid state.
+         </div>
+         </div>
+         <div class="col-md-4 col-sm-4">
+            <label for="day" class="form-label">day</label>
+            <input type="number" class="form-control" id="day" placeholder="" value="" required="">
+         </div>
+         <div class="col-md-4 col-sm-4">
+            <label for="month" class="form-label">month</label>
+            <input type="number" class="form-control" id="month" placeholder="" value="" required="">
+         </div>
+         <div class="col-md-4 col-sm-4">
+            <label for="duration" class="form-label">duration</label>
+            <input type="number" class="form-control" id="duration" placeholder="" value="" required="">
+         </div>
+         <div class="col-md-4 col-sm-4">
+            <label for="campign" class="form-label">campign</label>
+            <input type="number" class="form-control" id="campign" placeholder="" value="" required="">
+         </div>
+         <div class="col-md-4 col-sm-4">
+            <label for="previous" "="" class="form-label">previous"</label>
+            <select class="form-select" id="previous" required="">
+               <option value="">Choose...</option>
+               <option>0</option>
+               <option>1</option>
+            </select>
+            <div class="invalid-feedback">
+               Please provide a valid state.
+            </div>
+            </div>
+            <div class="col-md-4 col-sm-4">
+               <label for="poutcome" "="" class="form-label">poutcome"</label>
+               <select class="form-select" id="poutcome" required="">
+                  <option value="">Choose...</option>
+                  <option>0</option>
+                  <option>1</option>
+                  <option>2</option>
+               </select>
+               <div class="invalid-feedback">
+                  Please provide a valid state.
+               </div>
+               </div>
+               <button onclick="predictbankdeposit()" class="w-100 btn btn-lg btn-primary" type="submit">submit</button>
+               <!-- Optional JavaScript; choose one of the two! -->
+               <!-- Option 1: Bootstrap Bundle with Popper -->
+               <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+               <!-- Option 2: Separate Popper and Bootstrap JS -->
+               <!--
+                  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+                  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+                  -->
+            </div>
+         </div>
+
+<script>
+    $(document).on('submit', '#post-form',function(e){
+        e.preventDefault();
+        $.ajax({
+            type:'POST',
+            url:'{% url "predict:submit_prediction" %}',
+            data:{
+                age:$('#age').val(),
+                job:$('#job').val(),
+                marital:$('#marital').val(),
+                education:$('#education').val(),
+                balance:$('#balance').val(),
+                housing:$('#housing').val(),
+                loan:$('#loan').val(),
+                contact:$('#contact').val(),
+                day:$('#day').val(),
+                month:$('#month').val(),
+                duration:$('#duration').val(),
+                campaign:$('#campaign').val(),
+                previous:$('#previous').val(),
+                poutcome:$('#poutcome').val(),
+                csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+                action: 'post'
+            },
+            success:function(json) {
+                document.forms["post-form"].reset();
+                document.getElementById("prediction").innerHTML = json['result']
+                document.getElementById("Age").innerHTML = json['Age']
+                document.getElementById("job").innerHTML = json['job']
+                document.getElementById("marital").innerHTML = json['marital']
+                document.getElementById("balance").innerHTML = json['balance']
+                document.getElementById("housing").innerHTML = json['housing']
+                document.getElementById("loan").innerHTML = json['loan']
+                document.getElementById("contact").innerHTML = json['contact']
+                document.getElementById("day").innerHTML = json['day']
+                document.getElementById("month").innerHTML = json['month']
+                document.getElementById("duration").innerHTML = json['duration']
+                document.getElementById("campaign").innerHTML = json['campaign']
+                document.getElementById("previous").innerHTML = json['previous']
+                document.getElementById("poutcome").innerHTML = json['poutcome']
+            },
+            error : function(xhr,errmsg,err) {
+
+            }
+        });
+    })
+</script>
+
+{% endblock %}
+
